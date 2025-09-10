@@ -59,7 +59,8 @@ input#pageInput {
 	background: #fff;
 	outline: none;
 	transition: border-color .2s, box-shadow .2s;
-	direction: rtl;
+	direction: ltr;
+	text-align: center;
 }
 
 input#pageInput:focus {
@@ -123,7 +124,7 @@ button#goBtn:active {
 	gap: .75rem;
 	background: #fff;
 	padding: 1rem;
-	border-radius: 20px;
+	border-radius: 12px;
 	box-shadow: 0 6px 24px -4px rgba(0, 0, 0, .08), 0 2px 4px rgba(0, 0, 0, .04);
 	position: relative;
 }
@@ -138,7 +139,7 @@ button#goBtn:active {
 
 .page-img {
 	width: 100%;
-	border-radius: 14px;
+	border-radius: 6px;
 	object-fit: cover;
 	position: relative;
 }
