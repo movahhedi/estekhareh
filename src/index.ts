@@ -1,4 +1,4 @@
-import data from './data.json';
+import data from "./data.json";
 
 interface EstekharehRecord {
 	surah?: string;
@@ -13,11 +13,11 @@ const estekharehData = data as EstekharehMap;
 
 // Create DOM structure dynamically (keeps HTML lean)
 const root = document.body;
-root.innerHTML = '';
+root.innerHTML = "";
 
-const app = document.createElement('main');
-app.id = 'app';
-app.dir = 'rtl';
+const app = document.createElement("main");
+app.id = "app";
+app.dir = "rtl";
 app.innerHTML = `
 	<h1 class="title">استخاره</h1>
 	<form id="form" autocomplete="off" novalidate>
@@ -31,14 +31,15 @@ app.innerHTML = `
 		<div class="page-pair placeholder">برای نمایش صفحات، شماره صفحه فرد را وارد کنید.</div>
 	</section>
 	<section id="result" class="result" aria-live="polite"></section>
+
 `;
 
 root.appendChild(app);
 
-const pageInput = document.getElementById('pageInput') as HTMLInputElement;
-const form = document.getElementById('form') as HTMLFormElement;
-const pagesEl = document.getElementById('pages')!;
-const resultEl = document.getElementById('result')!;
+const pageInput = document.getElementById("pageInput") as HTMLInputElement;
+const form = document.getElementById("form") as HTMLFormElement;
+const pagesEl = document.getElementById("pages")!;
+const resultEl = document.getElementById("result")!;
 
 function normalizePage(value: string): number | null {
 	if (!value) return null;
@@ -50,7 +51,7 @@ function normalizePage(value: string): number | null {
 function isOdd(n: number) { return n % 2 === 1; }
 
 function updateHash(p: number) {
-	history.replaceState(null, '', `#p=${p}`);
+	history.replaceState(null, "", `#p=${p}`);
 }
 
 function loadFromHash(): number | null {
@@ -65,17 +66,17 @@ function buildPageImages(page: number) {
 	const evenSrc = `/pages/${evenPage}.gif`;
 	return `
 		<figure class="page-pair-inner">
-		<img class="page-img odd" src="${oddSrc}" alt="صفحه ${page}" onerror="this.classList.add('missing')" />
-			<img class="page-img even" src="${evenSrc}" alt="صفحه ${evenPage}" onerror="this.classList.add('missing')" />
+		<img class="page-img odd" src="${oddSrc}" alt="صفحه ${page}" onerror="this.classList.add("missing")" />
+			<img class="page-img even" src="${evenSrc}" alt="صفحه ${evenPage}" onerror="this.classList.add("missing")" />
 			<figcaption>صفحات ${page} و ${evenPage}</figcaption>
 		</figure>
 	`;
 }
 
 function field(label: string, value: string | undefined, cls: string) {
-	if (!value) return '';
+	if (!value) return "";
 	// Special styling for short result (نتیجه استخاره)
-	if (cls === 'short') {
+	if (cls === "short") {
 		const colorClass = classifyShort(value);
 		return `<li class="f ${cls} ${colorClass}"><span class="lbl">${label}:</span><span class="val">${value}</span></li>`;
 	}
@@ -85,12 +86,12 @@ function field(label: string, value: string | undefined, cls: string) {
 function classifyShort(v: string): string {
 	const t = v.trim();
 	// Green group
-	if (t === 'حتما انجام بده' || t === 'انجام بده') return 'short-good';
+	if (t === "حتما انجام بده" || t === "انجام بده") return "short-good";
 	// Yellow (neutral / اختیار)
-	if (t === 'اختیار با توست') return 'short-neutral';
+	if (t === "اختیار با توست") return "short-neutral";
 	// Red group (negative)
-	if (t === 'انجام نده' || t === 'هرگز انجام نده') return 'short-bad';
-	return 'short-neutral';
+	if (t === "انجام نده" || t === "هرگز انجام نده") return "short-bad";
+	return "short-neutral";
 }
 
 function showResult(page: number) {
@@ -110,12 +111,12 @@ function showResult(page: number) {
 
 	const list = `
 		<ul class="fields" role="list">
-			${field('سوره', record.surah, 'surah')}
-			${field('آیه', record.ayah, 'ayah')}
-			${field('نتیجه استخاره', record.short, 'short')}
-			${field('نتیجه کلی', record.overall, 'overall')}
-			${field('نتیجه ازدواج', record.marriage, 'marriage')}
-			${field('نتیجه معامله', record.trade, 'trade')}
+			${field("سوره", record.surah, "surah")}
+			${field("آیه", record.ayah, "ayah")}
+			${field("نتیجه استخاره", record.short, "short")}
+			${field("نتیجه کلی", record.overall, "overall")}
+			${field("نتیجه ازدواج", record.marriage, "marriage")}
+			${field("نتیجه معامله", record.trade, "trade")}
 		</ul>`;
 
 	resultEl.innerHTML = `<div class="card success estekhareh"><h2>صفحه ${page}</h2>${list}</div>`;
@@ -130,15 +131,15 @@ function handleSubmit(e?: Event) {
 	}
 	updateHash(page);
 	showResult(page);
-	localStorage.setItem('lastPage', String(page));
+	localStorage.setItem("lastPage", String(page));
 }
 
-form.addEventListener('submit', handleSubmit);
-pageInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') handleSubmit(); });
+form.addEventListener("submit", handleSubmit);
+pageInput.addEventListener("keyup", (e) => { if (e.key === "Enter") handleSubmit(); });
 
 // Initial
 const initial = loadFromHash() ?? (() => {
-	const ls = localStorage.getItem('lastPage');
+	const ls = localStorage.getItem("lastPage");
 	return ls ? parseInt(ls, 10) : null;
 })();
 if (initial) {
