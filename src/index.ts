@@ -74,7 +74,23 @@ function buildPageImages(page: number) {
 
 function field(label: string, value: string | undefined, cls: string) {
 	if (!value) return '';
+	// Special styling for short result (نتیجه استخاره)
+	if (cls === 'short') {
+		const colorClass = classifyShort(value);
+		return `<li class="f ${cls} ${colorClass}"><span class="lbl">${label}:</span><span class="val">${value}</span></li>`;
+	}
 	return `<li class="f ${cls}"><span class="lbl">${label}:</span><span class="val">${value}</span></li>`;
+}
+
+function classifyShort(v: string): string {
+	const t = v.trim();
+	// Green group
+	if (t === 'حتما انجام بده' || t === 'انجام بده') return 'short-good';
+	// Yellow (neutral / اختیار)
+	if (t === 'اختیار با توست') return 'short-neutral';
+	// Red group (negative)
+	if (t === 'انجام نده' || t === 'هرگز انجام نده') return 'short-bad';
+	return 'short-neutral';
 }
 
 function showResult(page: number) {

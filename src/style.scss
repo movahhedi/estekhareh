@@ -201,6 +201,9 @@ button#goBtn:active {
 .estekhareh .fields .lbl { font-weight: 600; color: #1d3c8f; font-size: .78rem; letter-spacing: .3px; opacity: .9; }
 .estekhareh .fields .val { line-height: 1.7; }
 .estekhareh .fields .short .val { font-weight: 600; color: #134b00; }
+.estekhareh .fields .short-good .val { color: #0c5e00; background: #e1f9e1; padding: .15rem .5rem; border-radius: .5rem; }
+.estekhareh .fields .short-neutral .val { color: #775f00; background: #fff5cc; padding: .15rem .5rem; border-radius: .5rem; }
+.estekhareh .fields .short-bad .val { color: #8a0210; background: #ffe1e5; padding: .15rem .5rem; border-radius: .5rem; }
 .estekhareh .fields .trade .val { font-weight: 500; }
 .estekhareh .fields .marriage .val { font-weight: 500; }
 
