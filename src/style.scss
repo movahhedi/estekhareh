@@ -196,6 +196,18 @@ button#goBtn:active {
 	border: 1px solid #e5484866;
 }
 
+.estekhareh .fields { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+.estekhareh .fields .f { display: grid; grid-template-columns: 130px 1fr; gap: .5rem; font-size: .9rem; align-items: start; }
+.estekhareh .fields .lbl { font-weight: 600; color: #1d3c8f; font-size: .78rem; letter-spacing: .3px; opacity: .9; }
+.estekhareh .fields .val { line-height: 1.7; }
+.estekhareh .fields .short .val { font-weight: 600; color: #134b00; }
+.estekhareh .fields .trade .val { font-weight: 500; }
+.estekhareh .fields .marriage .val { font-weight: 500; }
+
+@media (max-width: 560px) {
+	.estekhareh .fields .f { grid-template-columns: 100px 1fr; }
+}
+
 @media (max-width: 720px) {
 	#app {
 		padding: 1.25rem 1rem 3rem;

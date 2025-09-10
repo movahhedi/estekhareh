@@ -1,6 +1,14 @@
 import data from './data.json';
 
-type EstekharehMap = Record<string, { trade: string }>;
+interface EstekharehRecord {
+	surah?: string;
+	ayah?: string;
+	short?: string; // نتیجه استخاره مختصر
+	overall?: string; // نتیجه کلی
+	marriage?: string; // نتیجه ازدواج
+	trade?: string; // نتیجه معامله
+}
+type EstekharehMap = Record<string, EstekharehRecord>;
 const estekharehData = data as EstekharehMap;
 
 // Create DOM structure dynamically (keeps HTML lean)
@@ -64,6 +72,11 @@ function buildPageImages(page: number) {
 	`;
 }
 
+function field(label: string, value: string | undefined, cls: string) {
+	if (!value) return '';
+	return `<li class="f ${cls}"><span class="lbl">${label}:</span><span class="val">${value}</span></li>`;
+}
+
 function showResult(page: number) {
 	// Only odd allowed
 	if (!isOdd(page)) {
@@ -78,7 +91,18 @@ function showResult(page: number) {
 		resultEl.innerHTML = `<div class="card warn">برای صفحه ${page} نتیجه‌ای در داده‌ها یافت نشد.</div>`;
 		return;
 	}
-	resultEl.innerHTML = `<div class="card success"><h2>نتیجه صفحه ${page}</h2><p>${record.trade}</p></div>`;
+
+	const list = `
+		<ul class="fields" role="list">
+			${field('سوره', record.surah, 'surah')}
+			${field('آیه', record.ayah, 'ayah')}
+			${field('نتیجه استخاره', record.short, 'short')}
+			${field('نتیجه کلی', record.overall, 'overall')}
+			${field('نتیجه ازدواج', record.marriage, 'marriage')}
+			${field('نتیجه معامله', record.trade, 'trade')}
+		</ul>`;
+
+	resultEl.innerHTML = `<div class="card success estekhareh"><h2>صفحه ${page}</h2>${list}</div>`;
 }
 
 function handleSubmit(e?: Event) {
