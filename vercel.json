@@ -28,7 +28,7 @@
 			]
 		},
 		{
-			"source": "/assets/(.*).js",
+			"source": "/assets/.*?.js",
 			"headers": [
 				{
 					"key": "Content-Type",
@@ -37,20 +37,11 @@
 			]
 		},
 		{
-			"source": "/assets/(.*).css",
+			"source": "/assets/.*?.css",
 			"headers": [
 				{
 					"key": "Content-Type",
 					"value": "text/css"
-				}
-			]
-		},
-		{
-			"source": "/assets/(.*)",
-			"headers": [
-				{
-					"key": "Cache-Control",
-					"value": "max-age=31536000, immutable"
 				}
 			]
 		},
@@ -70,12 +61,6 @@
 					"value": "1; mode=block"
 				}
 			]
-		}
-	],
-	"rewrites": [
-		{
-			"source": "/",
-			"destination": "/index.html"
 		}
 	]
 }

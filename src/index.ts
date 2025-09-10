@@ -23,7 +23,7 @@ app.innerHTML = `
 	<form id="form" autocomplete="off" novalidate>
 		<label class="page-label" for="pageInput">شماره صفحه قرآن (فرد)</label>
 		<div class="input-row">
-			<input id="pageInput" inputmode="numeric" pattern="[0-9]*" placeholder="مثلاً 101" aria-describedby="help" />
+			<input id="pageInput" inputmode="numeric" pattern="[0-9]*" placeholder="شماره صفحه" aria-describedby="help" />
 			<button id="goBtn" type="submit">نمایش</button>
 		</div>
 	</form>
